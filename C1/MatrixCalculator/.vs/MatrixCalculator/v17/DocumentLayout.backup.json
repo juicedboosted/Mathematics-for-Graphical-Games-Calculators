@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{552965C1-AB28-446D-AA15-9C8B00BC304C}|MatrixCalculator\\MatrixCalculator.vcxproj|C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\MatrixCalculator\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{552965C1-AB28-446D-AA15-9C8B00BC304C}|MatrixCalculator\\MatrixCalculator.vcxproj|solutionrelative:MatrixCalculator\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{552965C1-AB28-446D-AA15-9C8B00BC304C}|MatrixCalculator\\MatrixCalculator.vcxproj|C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\MatrixCalculator\\Matrix.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{552965C1-AB28-446D-AA15-9C8B00BC304C}|MatrixCalculator\\MatrixCalculator.vcxproj|solutionrelative:MatrixCalculator\\Matrix.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{552965C1-AB28-446D-AA15-9C8B00BC304C}|MatrixCalculator\\MatrixCalculator.vcxproj|C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\MatrixCalculator\\Matrix.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{552965C1-AB28-446D-AA15-9C8B00BC304C}|MatrixCalculator\\MatrixCalculator.vcxproj|solutionrelative:MatrixCalculator\\Matrix.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Matrix.cpp",
+              "DocumentMoniker": "C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\MatrixCalculator\\Matrix.cpp",
+              "RelativeDocumentMoniker": "MatrixCalculator\\Matrix.cpp",
+              "ToolTip": "C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\MatrixCalculator\\Matrix.cpp",
+              "RelativeToolTip": "MatrixCalculator\\Matrix.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-21T01:07:52.775Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Matrix.h",
+              "DocumentMoniker": "C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\MatrixCalculator\\Matrix.h",
+              "RelativeDocumentMoniker": "MatrixCalculator\\Matrix.h",
+              "ToolTip": "C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\MatrixCalculator\\Matrix.h",
+              "RelativeToolTip": "MatrixCalculator\\Matrix.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-18T07:23:15.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\MatrixCalculator\\main.cpp",
+              "RelativeDocumentMoniker": "MatrixCalculator\\main.cpp",
+              "ToolTip": "C:\\Users\\Nate\\Documents\\GitHub\\Mathematics-for-Graphical-Games-Calculators\\C1\\MatrixCalculator\\MatrixCalculator\\main.cpp",
+              "RelativeToolTip": "MatrixCalculator\\main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-18T07:17:47.86Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

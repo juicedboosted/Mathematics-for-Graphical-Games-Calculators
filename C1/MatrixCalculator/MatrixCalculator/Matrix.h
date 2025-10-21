@@ -33,5 +33,7 @@ private:
 	int columns;
 
 	vector<vector<float>> data;
+
+	std::string ValueAsString(int row, int column);
 };
 

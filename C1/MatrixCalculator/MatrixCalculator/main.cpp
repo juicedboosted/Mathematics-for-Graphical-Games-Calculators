@@ -17,14 +17,14 @@ int main()
 	file >> scalar;
 
 	cout << "Matrix A:\n";
-	//A.Print();
+	A.Print();
 	cout << "Matrix B:\n";
-	//B.Print();
+	B.Print();
 	cout << "Scalar: " << scalar << "\n\n";
 
 	cout << "Determinant of A: " << A.Determinant() << "\n\n";
 	cout << "A Transposed:\n";
-	//A.Transpose.Print();
+	// A.Transpose.Print();
 	
 	//add inverse
 

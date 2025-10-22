@@ -1,6 +1,2 @@
 ﻿  main.cpp
-C:\Users\Nate\Documents\GitHub\Mathematics-for-Graphical-Games-Calculators\C1\MatrixCalculator\MatrixCalculator\main.cpp(32,19): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Matrix.cpp
-  Generating Code...
-C:\Users\Nate\Documents\GitHub\Mathematics-for-Graphical-Games-Calculators\C1\MatrixCalculator\MatrixCalculator\Matrix.cpp(40,1): error C4716: 'Matrix::Determinant': must return a value
-C:\Users\Nate\Documents\GitHub\Mathematics-for-Graphical-Games-Calculators\C1\MatrixCalculator\MatrixCalculator\Matrix.cpp(56,1): error C4716: 'Matrix::Inverse': must return a value
+  MatrixCalculator.vcxproj -> C:\Users\Nate\Documents\GitHub\Mathematics-for-Graphical-Games-Calculators\C1\MatrixCalculator\x64\Debug\MatrixCalculator.exe

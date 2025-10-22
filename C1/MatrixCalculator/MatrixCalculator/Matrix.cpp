@@ -4,14 +4,14 @@
 #include <sstream>
 #include <iomanip>
 
-Matrix::Matrix(int _rows, int _columns)
+Matrix::Matrix(int _rows, int _columns) //J
 {
 	rows = _rows;
 	columns = _columns;
 	data.resize(_rows, vector<float>(_columns, 0));
 }
 
-Matrix::Matrix(std::ifstream& _in, int _rows, int _columns)
+Matrix::Matrix(std::ifstream& _in, int _rows, int _columns) //J
 {
 	rows = _rows;
 	columns = _columns;
@@ -23,18 +23,29 @@ Matrix::Matrix(std::ifstream& _in, int _rows, int _columns)
 	}
 }
 
-int Matrix::GetRows() const
+int Matrix::GetRows() const //J
 {
 	return rows;
 }
 
-int Matrix::GetColumns() const
+int Matrix::GetColumns() const //J
 {
 	return columns;
 }
 
-//u can do this one max :3
-void Matrix::Print()
+void Matrix::SetData(vector<vector<float>>& _data) //J
+{
+	data = _data;
+	rows = _data.size();
+	if (_data.empty()) {
+		columns = 0;
+	}
+	else {
+		columns = _data[0].size();
+	}
+}
+
+void Matrix::Print() //M
 {
 	// Figure out what size the largest cell will be
 	int cellWidth = 0;
@@ -43,7 +54,7 @@ void Matrix::Print()
 		for (int x = 0; x < columns; x++)
 		{
 			// Convert it to a string then get its width
-			int currentCellWidth = ValueAsString(x, y).length();
+			int currentCellWidth = ValueAsString(y, x).length();
 			if (currentCellWidth > cellWidth) cellWidth = currentCellWidth;
 		}
 	}
@@ -74,7 +85,7 @@ void Matrix::Print()
 			// Measure the current number and 
 			// calculate padding to ensure it 
 			// fits in the middle of the cell
-			int numberWidth = ValueAsString(x, y).length();
+			int numberWidth = ValueAsString(y, x).length();
 			int paddingLeft = (cellWidth - numberWidth) / 2;
 			int paddingRight = cellWidth - (numberWidth + paddingLeft);
 
@@ -82,7 +93,7 @@ void Matrix::Print()
 			printContent += (
 				"|" +
 				std::string(paddingLeft, ' ') +
-				ValueAsString(x, y) +
+				ValueAsString(y, x) +
 				std::string(paddingRight, ' ')
 			);
 		}
@@ -98,13 +109,12 @@ void Matrix::Print()
 	std::cout << printContent;
 }
 
-//u can do this one max :3
-float Matrix::Determinant()
+float Matrix::Determinant() //M
 {
 	return 1;
 }
 
-Matrix Matrix::Transpose()
+Matrix Matrix::Transpose() //J
 {
 	Matrix transposeM(columns, rows);
 	for (int i = 0; i < rows; i++) {
@@ -114,13 +124,13 @@ Matrix Matrix::Transpose()
 	}
 	return transposeM;
 }
-//u can do this one max :3
-Matrix Matrix::Inverse()
+
+Matrix Matrix::Inverse() //M
 {
 	return Matrix(1, 1);
 }
 
-Matrix Matrix::ScalarMultiply(float _scalar)
+Matrix Matrix::ScalarMultiply(float _scalar) //J
 {
 	Matrix scalarM(rows, columns);
 	for (int i = 0; i < rows; i++) {\
@@ -131,7 +141,7 @@ Matrix Matrix::ScalarMultiply(float _scalar)
 	return scalarM;
 }
 
-Matrix Matrix::Add(Matrix& _other)
+Matrix Matrix::Add(Matrix& _other) //J
 {
 	//reminder: setup error check
 	Matrix addM(rows, columns);
@@ -143,7 +153,7 @@ Matrix Matrix::Add(Matrix& _other)
 	return addM;
 }
 
-Matrix Matrix::Subtract(Matrix& _other)
+Matrix Matrix::Subtract(Matrix& _other) //J
 {
 	//reminder: setup error check
 	Matrix subtractM(rows, columns);
@@ -155,7 +165,7 @@ Matrix Matrix::Subtract(Matrix& _other)
 	return subtractM;
 }
 
-Matrix Matrix::Multiply(Matrix& _other)
+Matrix Matrix::Multiply(Matrix& _other) //J
 {
 	//reminder: setup error check
 	Matrix multiplyM(rows, _other.columns);
@@ -169,7 +179,7 @@ Matrix Matrix::Multiply(Matrix& _other)
 	return multiplyM;
 }
 
-Matrix Matrix::Identity(int _size)
+Matrix Matrix::Identity(int _size) //J
 {
 	Matrix identityM(_size, _size);
 	for (int i = 0; i < _size; i++) {
@@ -178,7 +188,7 @@ Matrix Matrix::Identity(int _size)
 	return identityM;
 }
 
-std::string Matrix::ValueAsString(int row, int column)
+std::string Matrix::ValueAsString(int row, int column) //M
 {
 	// Ensure we use a valid coordinate thing
 	if (row > rows || column > columns)
@@ -203,3 +213,41 @@ std::string Matrix::ValueAsString(int row, int column)
 	// Give back the full formatted float
 	return output;
 }
+
+Matrix Matrix::ReadMatrix(ifstream& _in) //J
+{
+	//reads numbers until blank line
+	vector<vector<float>> values;
+	string line;
+
+	while (getline(_in, line)) {
+		if (line.empty()) {
+			break;
+		}
+		stringstream stream(line);
+		vector<float> row;
+		float number;
+
+		while (stream >> number) {
+			row.push_back(number);
+		}
+
+		if (!row.empty()) {
+			values.push_back(row);
+		}
+	}
+	if (values.empty()) {
+		return Matrix(0, 0);
+	}
+
+	//counts how many numbers per line
+	int rows = values.size();
+	int columns = values[0].size();
+
+	//fills matrix
+	Matrix result(values.size(), values[0].size());
+	result.SetData(values);
+
+	return result;
+}
+

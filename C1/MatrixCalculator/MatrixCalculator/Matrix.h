@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Matrix
+class Matrix //J
 {
 public:
 	Matrix(int _rows, int _columns);
@@ -14,6 +14,7 @@ public:
 	//get
 	int GetRows() const;
 	int GetColumns() const;
+	bool IsSquare() const;
 
 	//display
 	void Print();
@@ -28,12 +29,18 @@ public:
 	Matrix Multiply(Matrix& _other);
 	Matrix Identity(int _size);
 
+	//read file
+	static Matrix ReadMatrix(ifstream& _in);
+	void SetData(vector<vector<float>>& _data);
+
 private:
 	int rows;
 	int columns;
 
 	vector<vector<float>> data;
 
-	std::string ValueAsString(int row, int column);
+	std::string ValueAsString(int row, int column); //M
+	int GetSign(int row, int column); //M
+	Matrix RemoveRowAndColumn(int row, int column); //M
 };
 

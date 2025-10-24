@@ -22,7 +22,7 @@ int main()
 	B.Print();
 	cout << "Scalar: " << scalar << "\n\n";
 
-	cout << "Determinant of A: " << A.Determinant() << "\n\n";
+	cout << "Determinant of A: " << A.GetDeterminant() << "\n\n";
 	cout << "A Transposed:\n";
 	// A.Transpose.Print();
 	

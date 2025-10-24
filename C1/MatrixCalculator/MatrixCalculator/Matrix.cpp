@@ -4,7 +4,7 @@
 #include <sstream>
 #include <iomanip>
 
-Matrix::Matrix(int _rows, int _columns) //J
+Matrix::Matrix(int _rows, int _columns) // J
 {
 	rows = _rows;
 	columns = _columns;
@@ -114,14 +114,31 @@ void Matrix::Print() //M
 	std::cout << printContent;
 }
 
-float Matrix::Determinant() //M
+float Matrix::GetDeterminant() //M
 {
 	// Only square matrixes can have a determinant
 	// TODO: Print some sorta error message
-	if (IsSquare() == false) return 0;
+	if (IsSquare() == false) 0.0f;
 
-	
+	// Check for if we have subdivided the matrix as much as possible
+	if (Is2x2()) return GetDeterminantOf2x2Matrix(*this);
 
+	float determinant = 0.0f;
+
+	// Loop over every 'cell' in the first row
+	for (int x = 0; x < columns; x++)
+	{
+		// Chop the matrix up into a smaller one
+		Matrix subMatrix = RemoveRowAndColumn(0, x);
+
+		// Figure if we need to plus or minus
+		float sign = ((x % 2) == 0) ? 1.0f : -1.0f;
+
+		// Add the current 'matrix' to the final value
+		determinant += sign * data[0][x] * subMatrix.GetDeterminant();
+	}
+
+	return determinant;
 }
 
 Matrix Matrix::Transpose() //J
@@ -224,15 +241,17 @@ std::string Matrix::ValueAsString(int row, int column) //M
 	return output;
 }
 
-// Get the sign conversion needed to get the determinant
-int Matrix::GetSign(int row, int column)
+float Matrix::GetDeterminantOf2x2Matrix(Matrix matrix)
 {
-	// Check for what cell we're looking at
-	int cellIndex = (rows * row) + column;
-	bool even = cellIndex % 2 == 0;
+	return (
+		(matrix.data[0][0] * matrix.data[1][1]) -
+		(matrix.data[1][0] * matrix.data[0][1])
+	);
+}
 
-	// Return the correct sign
-	return even ? 1 : -1;
+bool Matrix::Is2x2()
+{
+	return rows == 2 && columns == 2;
 }
 
 // Remove the provided row/column
@@ -251,7 +270,7 @@ Matrix Matrix::RemoveRowAndColumn(int row, int column)
 	{
 		// Skip the deleted row
 		if (y == row) continue;
-
+		
 		int newX = 0;
 		for (int x = 0; x < columns; x++)
 		{
@@ -259,7 +278,7 @@ Matrix Matrix::RemoveRowAndColumn(int row, int column)
 			if (x == column) continue;
 
 			// Set the new data
-			matrix.data[newX][newY] = data[x][y];
+			matrix.data[newY][newX] = data[y][x];
 
 			// Update the new position since it
 			// won't be a 1:1 mapping anymore

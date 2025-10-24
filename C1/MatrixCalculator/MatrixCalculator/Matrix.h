@@ -8,7 +8,7 @@ using namespace std;
 class Matrix //J
 {
 public:
-	Matrix(int _rows, int _columns);
+	Matrix(int _rows = 0, int _columns = 0);
 	Matrix(std::ifstream& _in, int _rows, int _columns);
 
 	//get
@@ -20,7 +20,7 @@ public:
 	void Print();
 
 	//operations
-	float Determinant();
+	float GetDeterminant();
 	Matrix Transpose();
 	Matrix Inverse();
 	Matrix ScalarMultiply(float _scalar);
@@ -40,7 +40,10 @@ private:
 	vector<vector<float>> data;
 
 	std::string ValueAsString(int row, int column); //M
-	int GetSign(int row, int column); //M
+
+	static float GetDeterminantOf2x2Matrix(Matrix matrix); //M
+	bool Is2x2();
+
 	Matrix RemoveRowAndColumn(int row, int column); //M
 };
 

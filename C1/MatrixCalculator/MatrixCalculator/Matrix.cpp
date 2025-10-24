@@ -4,14 +4,14 @@
 #include <sstream>
 #include <iomanip>
 
-Matrix::Matrix(int _rows, int _columns) // J
+Matrix::Matrix(int _rows, int _columns) 
 {
 	rows = _rows;
 	columns = _columns;
 	data.resize(_rows, vector<float>(_columns, 0));
 }
 
-Matrix::Matrix(std::ifstream& _in, int _rows, int _columns) //J
+Matrix::Matrix(std::ifstream& _in, int _rows, int _columns)
 {
 	rows = _rows;
 	columns = _columns;
@@ -23,12 +23,12 @@ Matrix::Matrix(std::ifstream& _in, int _rows, int _columns) //J
 	}
 }
 
-int Matrix::GetRows() const //J
+int Matrix::GetRows() const
 {
 	return rows;
 }
 
-int Matrix::GetColumns() const //J
+int Matrix::GetColumns() const
 {
 	return columns;
 }
@@ -38,7 +38,7 @@ bool Matrix::IsSquare() const
 	return rows == columns;
 }
 
-void Matrix::SetData(vector<vector<float>>& _data) //J
+void Matrix::SetData(vector<vector<float>>& _data)
 {
 	data = _data;
 	rows = _data.size();
@@ -50,7 +50,7 @@ void Matrix::SetData(vector<vector<float>>& _data) //J
 	}
 }
 
-void Matrix::Print() //M
+void Matrix::Print()
 {
 	// Figure out what size the largest cell will be
 	int cellWidth = 0;
@@ -114,34 +114,30 @@ void Matrix::Print() //M
 	std::cout << printContent;
 }
 
-float Matrix::GetDeterminant() //M
+float Matrix::GetDeterminant()
 {
 	// Only square matrixes can have a determinant
 	// TODO: Print some sorta error message
-	if (IsSquare() == false) 0.0f;
+	if (IsSquare() == false) return 0.0f;
 
 	// Check for if we have subdivided the matrix as much as possible
 	if (Is2x2()) return GetDeterminantOf2x2Matrix(*this);
 
-	float determinant = 0.0f;
-
 	// Loop over every 'cell' in the first row
+	float determinant = 0.0f;
 	for (int x = 0; x < columns; x++)
 	{
 		// Chop the matrix up into a smaller one
 		Matrix subMatrix = RemoveRowAndColumn(0, x);
 
-		// Figure if we need to plus or minus
-		float sign = ((x % 2) == 0) ? 1.0f : -1.0f;
-
 		// Add the current 'matrix' to the final value
-		determinant += sign * data[0][x] * subMatrix.GetDeterminant();
+		determinant += GetSign(0, x) * data[0][x] * subMatrix.GetDeterminant();
 	}
 
 	return determinant;
 }
 
-Matrix Matrix::Transpose() //J
+Matrix Matrix::Transpose()
 {
 	Matrix transposeM(columns, rows);
 	for (int i = 0; i < rows; i++) {
@@ -152,12 +148,40 @@ Matrix Matrix::Transpose() //J
 	return transposeM;
 }
 
-Matrix Matrix::Inverse() //M
+Matrix Matrix::Inverse()
 {
-	return Matrix(1, 1);
+	// Only square matrixes can have a determinant
+	// TODO: Print some sorta error message
+	if (IsSquare() == false) return Matrix();
+
+	// Get the determinant of the matrix in its
+	// current state and ensure its not zero
+	// TODO: Print some sorta error message
+	float determinant = GetDeterminant();
+	if (determinant == 0.0f) return Matrix();
+
+	// Find what the cofactor matrix is
+	Matrix cofactor(rows, columns);
+	for (int y = 0; y < rows; y++)
+	{
+		for (int x = 0; x < columns; x++)
+		{
+			// Split the matrix into a smaller chunk
+			Matrix subMatrix = RemoveRowAndColumn(y, x);
+
+			// Check for if we need to plus or minus
+			cofactor.data[y][x] = GetSign(y, x) * subMatrix.GetDeterminant();
+		}
+	}
+
+	// Get the adjugate matrix (flipped thingy)
+	Matrix adjugate = cofactor.Transpose();
+
+	// Divide it by one to get the actual inverse
+	return adjugate.ScalarMultiply(1.0f / determinant);
 }
 
-Matrix Matrix::ScalarMultiply(float _scalar) //J
+Matrix Matrix::ScalarMultiply(float _scalar)
 {
 	Matrix scalarM(rows, columns);
 	for (int i = 0; i < rows; i++) {\
@@ -168,7 +192,7 @@ Matrix Matrix::ScalarMultiply(float _scalar) //J
 	return scalarM;
 }
 
-Matrix Matrix::Add(Matrix& _other) //J
+Matrix Matrix::Add(Matrix& _other)
 {
 	//reminder: setup error check
 	Matrix addM(rows, columns);
@@ -180,7 +204,7 @@ Matrix Matrix::Add(Matrix& _other) //J
 	return addM;
 }
 
-Matrix Matrix::Subtract(Matrix& _other) //J
+Matrix Matrix::Subtract(Matrix& _other)
 {
 	//reminder: setup error check
 	Matrix subtractM(rows, columns);
@@ -192,7 +216,7 @@ Matrix Matrix::Subtract(Matrix& _other) //J
 	return subtractM;
 }
 
-Matrix Matrix::Multiply(Matrix& _other) //J
+Matrix Matrix::Multiply(Matrix& _other)
 {
 	//reminder: setup error check
 	Matrix multiplyM(rows, _other.columns);
@@ -206,7 +230,7 @@ Matrix Matrix::Multiply(Matrix& _other) //J
 	return multiplyM;
 }
 
-Matrix Matrix::Identity(int _size) //J
+Matrix Matrix::Identity(int _size)
 {
 	Matrix identityM(_size, _size);
 	for (int i = 0; i < _size; i++) {
@@ -215,7 +239,7 @@ Matrix Matrix::Identity(int _size) //J
 	return identityM;
 }
 
-std::string Matrix::ValueAsString(int row, int column) //M
+std::string Matrix::ValueAsString(int row, int column)
 {
 	// Ensure we use a valid coordinate thing
 	if (row > rows || column > columns)
@@ -291,7 +315,12 @@ Matrix Matrix::RemoveRowAndColumn(int row, int column)
 	return matrix;
 }
 
-Matrix Matrix::ReadMatrix(ifstream& _in) //J
+float Matrix::GetSign(int row, int column)
+{
+	return ((row + column) % 2 == 0) ? 1 : -1;
+}
+
+Matrix Matrix::ReadMatrix(ifstream& _in)
 {
 	//reads numbers until blank line
 	vector<vector<float>> values;

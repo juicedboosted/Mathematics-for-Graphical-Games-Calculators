@@ -24,9 +24,9 @@ int main()
 
 	cout << "Determinant of A: " << A.GetDeterminant() << "\n\n";
 	cout << "A Transposed:\n";
-	// A.Transpose.Print();
+	A.Transpose().Print();
 	
-	//add inverse
+	A.Inverse().Print();
 
 	cout << "A * Scalar:\n";
 	A.ScalarMultiply(scalar).Print();

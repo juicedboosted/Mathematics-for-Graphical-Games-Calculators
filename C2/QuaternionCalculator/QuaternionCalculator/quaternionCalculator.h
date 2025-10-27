@@ -12,16 +12,17 @@ public:
 	float W;
 
 	Quaternion(float x = 0.0f, float y = 0.0f, float z = 0.0f, float w = 1.0f);
-	Quaternion ParseFromString(std::string stringifiedQuaternion); // M
+	static Quaternion ParseFromString(std::string stringifiedQuaternion); // M
 
-	Quaternion Plus(Quaternion other); // M
-	Quaternion Minus(Quaternion other); // M
-	Quaternion Times(Quaternion other); // M
-	Quaternion DotProduct(Quaternion other); // M
-	Quaternion Conjugate(Quaternion other);
+	Quaternion Plus(Quaternion& other); // M
+	Quaternion Minus(Quaternion& other); // M
+	Quaternion Times(Quaternion& other); // M
+	Quaternion Times(float scalar); // M
+	float GetDotProduct(Quaternion& other); // M
+	Quaternion Conjugate(Quaternion& other);
+	Quaternion Transform(Quaternion& other);
 	Quaternion Inverse();
-	Quaternion Normalise();
-	Quaternion Transform(Quaternion other);
+	float GetMagnitude();
 
 	void Print(); // M
 };

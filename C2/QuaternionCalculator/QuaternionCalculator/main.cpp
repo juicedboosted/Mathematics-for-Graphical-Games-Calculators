@@ -8,5 +8,8 @@
 int main()
 {
 
+	Quaternion::ParseFromString("1+2i+3j+4k").Print();
+	Quaternion::ParseFromString("2-1i+1j-2k").Print();
+
 	return 0;
 }

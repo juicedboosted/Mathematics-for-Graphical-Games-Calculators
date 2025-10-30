@@ -16,17 +16,20 @@ public:
 
 	Quaternion Plus(Quaternion& other); // M
 	Quaternion Minus(Quaternion& other); // M
+
 	Quaternion Times(Quaternion& other); // M
 	Quaternion Times(float scalar); // M
+	Quaternion Divide(float scalar); // M
+
 	float GetDotProduct(Quaternion& other); // M
-	Quaternion Conjugate(Quaternion& other);
-	Quaternion Transform(Quaternion& other);
-	Quaternion Inverse();
-	float GetMagnitude();
+	Quaternion GetConjugate(); // J
+	Quaternion Transform(Quaternion& other); // J
+	Quaternion GetInverse(); // J
+	float GetMagnitude(); // J
 
 	void Print(); // M
 
 private:
 	// TODO: Put in a utils class
-	static bool RemoveIfEndsWith(std::string& string, std::string ending);
+	static bool RemoveIfEndsWith(std::string& string, std::string ending); // M
 };

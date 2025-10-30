@@ -97,6 +97,17 @@ Quaternion Quaternion::Times(float scalar)
 	);
 }
 
+Quaternion Quaternion::Divide(float scalar)
+{
+	return Quaternion
+	(
+		X / scalar,
+		Y / scalar,
+		Z / scalar,
+		W / scalar
+	);
+}
+
 float Quaternion::GetDotProduct(Quaternion &other)
 {
 	return (
@@ -105,6 +116,17 @@ float Quaternion::GetDotProduct(Quaternion &other)
 		(Z * other.Z) +
 		(W * other.W)
 	);
+}
+
+Quaternion Quaternion::GetConjugate()
+{
+	return Quaternion(-X, -Y, -Z, W);
+}
+
+Quaternion Quaternion::GetInverse()
+{
+	// TODO: Add maths operator overloads because this is gross
+    return GetConjugate().Divide(GetMagnitude() * GetMagnitude());
 }
 
 float Quaternion::GetMagnitude()

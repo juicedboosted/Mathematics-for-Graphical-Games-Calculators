@@ -25,4 +25,8 @@ public:
 	float GetMagnitude();
 
 	void Print(); // M
+
+private:
+	// TODO: Put in a utils class
+	static bool RemoveIfEndsWith(std::string& string, std::string ending);
 };

@@ -17,35 +17,34 @@ Quaternion Quaternion::ParseFromString(std::string stringifiedQuaternion)
 	// Loop over every character in the string and
 	// figure out what bit is what component
 	std::string currentComponent;
-	for (int i = 1; i < stringifiedQuaternion.length(); i++)
+	for (int i = stringifiedQuaternion.length() - 1; i >= 0; i--)
 	{
 		char& token = stringifiedQuaternion[i];
-		char& previousToken = stringifiedQuaternion[i - 1];
 
-		// Check for if we're looking at a 'control character'
-		if (token == '+')
+		// Check for if we've finished a component
+		if (token == '+' || token == '-' || i == 0)
 		{
-			// If there was no previous component
-			// then use the previous token
-			if (currentComponent.empty()) currentComponent += previousToken;
+			// Special case for the last character
+			if (i == 0)
+			{
+				currentComponent = token + currentComponent;
+				newQuaternion.W = std::stof(currentComponent);
+			}
 
-			// Get the component as a number
-			float value = std::stof(currentComponent);
-
-			// Save our component to the correct value
-			if (previousToken == 'i') newQuaternion.X = value;
-			if (previousToken == 'j') newQuaternion.Y = value;
-			if (previousToken == 'k') newQuaternion.Z = value;
-			else newQuaternion.W = value;
+			// Set the X, Y, and Z
+			if (RemoveIfEndsWith(currentComponent, "i")) newQuaternion.X = std::stof(currentComponent);
+			else if (RemoveIfEndsWith(currentComponent, "j")) newQuaternion.Y = std::stof(currentComponent);
+			else if (RemoveIfEndsWith(currentComponent, "k")) newQuaternion.Z = std::stof(currentComponent);
 
 			// Clear the component for the next one
-			currentComponent.clear();
+			currentComponent = "";
 		}
 		else
 		{
-			// Add the new symbol/number to the component
-			currentComponent += previousToken;
-		}		
+			// Add the token to the front of the current
+			// component since we're looping through backwards
+			currentComponent = token + currentComponent;
+		}
 	}
 
 	return newQuaternion;
@@ -54,4 +53,26 @@ Quaternion Quaternion::ParseFromString(std::string stringifiedQuaternion)
 void Quaternion::Print()
 {
 	std::cout << "{ " << X << ", " << Y << ", " << Z << ", " << W << " }\n";
+}
+
+
+
+// TODO: Put in a utils class
+bool Quaternion::RemoveIfEndsWith(std::string& string, std::string ending)
+{
+	// The ending must be able to 'fit' inside
+	// the string it's being searched for in
+	if (ending.length() > string.length()) return false;
+ 
+	// 'trim' the string and check for if
+	// the end string is in it
+	bool endsWith = (string.compare(
+		string.length() - ending.length(),
+		ending.length(),
+		ending
+	) == 0);
+
+	// If it ends with the thing then remove it
+	if (endsWith) string.pop_back();
+	return endsWith;
 }

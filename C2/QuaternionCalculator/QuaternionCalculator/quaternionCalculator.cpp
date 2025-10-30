@@ -123,10 +123,16 @@ Quaternion Quaternion::GetConjugate()
 	return Quaternion(-X, -Y, -Z, W);
 }
 
+Quaternion Quaternion::Transform(Quaternion &target)
+{
+	// TODO: Add maths operator overloads because this is gross
+	return Times(target).Times(GetInverse());
+}
+
 Quaternion Quaternion::GetInverse()
 {
 	// TODO: Add maths operator overloads because this is gross
-    return GetConjugate().Divide(GetMagnitude() * GetMagnitude());
+	return GetConjugate().Divide(GetMagnitude() * GetMagnitude());
 }
 
 float Quaternion::GetMagnitude()

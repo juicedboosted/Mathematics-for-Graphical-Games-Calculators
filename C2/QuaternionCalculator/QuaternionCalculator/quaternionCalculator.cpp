@@ -1,6 +1,8 @@
 #include "quaternionCalculator.h"
 
 #include <iostream>
+#include <cmath>
+
 
 Quaternion::Quaternion(float x, float y, float z, float w)
 {
@@ -48,6 +50,73 @@ Quaternion Quaternion::ParseFromString(std::string stringifiedQuaternion)
 	}
 
 	return newQuaternion;
+}
+
+Quaternion Quaternion::Plus(Quaternion &other)
+{
+	return Quaternion
+	(
+		X + other.X,
+		Y + other.Y,
+		Z + other.Z,
+		W + other.W
+	);
+}
+
+Quaternion Quaternion::Minus(Quaternion &other)
+{
+	return Quaternion
+	(
+		X - other.X,
+		Y - other.Y,
+		Z - other.Z,
+		W - other.W
+	);
+}
+
+Quaternion Quaternion::Times(Quaternion &other)
+{
+	// TODO: Maybe don't hardcode somehow
+	return Quaternion
+	(
+		(W * other.X) + (X * other.W) + (Y * other.Z) - (Z * other.Y),
+		(W * other.Y) - (X * other.Z) + (Y * other.W) + (Z * other.X),
+		(W * other.Z) + (X * other.Y) - (Y * other.X) + (Z * other.W),
+		(W * other.W) - (X * other.X) - (Y * other.Y) - (Z * other.Z)
+	);
+}
+
+Quaternion Quaternion::Times(float scalar)
+{
+	return Quaternion
+	(
+		X * scalar,
+		Y * scalar,
+		Z * scalar,
+		W * scalar
+	);
+}
+
+float Quaternion::GetDotProduct(Quaternion &other)
+{
+	return (
+		(X * other.X) +
+		(Y * other.Y) +
+		(Z * other.Z) +
+		(W * other.W)
+	);
+}
+
+float Quaternion::GetMagnitude()
+{
+	//? I assume I am allowed to use this square root method
+	//? It's the only thing used from <cmath>
+	return sqrt(
+		(X * X) + 
+		(Y * Y) + 
+		(Z * Z) + 
+		(W * W) 
+	);
 }
 
 void Quaternion::Print()

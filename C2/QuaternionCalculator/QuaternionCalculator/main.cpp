@@ -65,5 +65,8 @@ int main()
 	std::cout << "a * scalar = " << a.Times(scalar) << std::endl;
 	std::cout << "a / scalar = " << a.Divide(scalar) << std::endl;
 
+	// Stop the console from closing
+	std::cin.get();
+
 	return 0;
 }

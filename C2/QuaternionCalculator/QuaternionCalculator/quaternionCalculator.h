@@ -23,10 +23,10 @@ public:
 	Quaternion Divide(float scalar); // M
 
 	float GetDotProduct(Quaternion& other); // M
-	Quaternion GetConjugate(); // J
+	float GetMagnitude(); // J
 	Quaternion Transform(Quaternion& other); // J
 	Quaternion GetInverse(); // J
-	float GetMagnitude(); // J
+	Quaternion GetConjugate(); // J
 
 	void Print(); // M
 

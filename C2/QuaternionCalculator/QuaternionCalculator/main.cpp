@@ -51,5 +51,26 @@ int main()
 	std::cout << "Second quaternion:\t" << quaternion2 << std::endl;
 	std::cout << "Scalar:\t\t\t" << scalar << std::endl;
 
+	std::cout << std::endl << std::endl << std::endl;
+
+	// Plussing and minusing
+	std::cout << quaternion1 << " + " << quaternion2 << " = " << quaternion1.Plus(quaternion2) << std::endl;
+	std::cout << quaternion1 << " - " << quaternion2 << " = " << quaternion1.Minus(quaternion2) << std::endl;
+
+	// Timesing and dividing
+	std::cout << quaternion1 << " * " << quaternion2 << " = " << quaternion1.Times(quaternion2) << std::endl;
+	std::cout << quaternion1 << " * " << scalar << " = " << quaternion1.Times(scalar) << std::endl;
+	std::cout << quaternion1 << " / " << scalar << " = " << quaternion1.Divide(scalar) << std::endl;
+
+	// Other stuff idk
+	std::cout << "Dot product of " << quaternion1 << " and " << quaternion2 << " = " << quaternion1.GetDotProduct(quaternion2) << std::endl;
+	std::cout << "Magnitude of " << quaternion1 << " = " << quaternion1.GetMagnitude() << std::endl;
+	
+	// Other other stuff
+	std::cout << "Conjugate of " << quaternion1 << " = " << quaternion1.GetConjugate() << std::endl;
+	std::cout << quaternion1 << " transformed around " << quaternion2 << " = " << quaternion1.Transform(quaternion2) << std::endl;
+	std::cout << "Inverse of " << quaternion1 << " = " << quaternion1.GetInverse() << std::endl;
+
+	
 	return 0;
 }

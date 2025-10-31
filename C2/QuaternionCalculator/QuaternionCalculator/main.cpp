@@ -40,37 +40,30 @@ void ParseQuestionFile(std::string path, Quaternion& quaternion1,  Quaternion& q
 int main()
 {
 	// Load all the data
-	Quaternion quaternion1;
-	Quaternion quaternion2;
+	Quaternion a;
+	Quaternion b;
 	float scalar = 0.0f;
-	ParseQuestionFile("./Quaternion.txt", quaternion1, quaternion2, scalar);
+	ParseQuestionFile("./Quaternion.txt", a, b, scalar);
 
 	// Print the initially loaded data
 	std::cout << "Loaded data from file:" << std::endl;
-	std::cout << "First quaternion:\t" << quaternion1 << std::endl;
-	std::cout << "Second quaternion:\t" << quaternion2 << std::endl;
-	std::cout << "Scalar:\t\t\t" << scalar << std::endl;
+	std::cout << "a:\t" << a << std::endl;
+	std::cout << "b:\t" << b << std::endl;
+	std::cout << "Scalar:\t" << scalar << std::endl << std::endl;
+	std::cout << std::endl;
 
-	std::cout << std::endl << std::endl << std::endl;
+	// Print everything
+	std::cout << "a + b = " << a.Plus(b) << std::endl;
+	std::cout << "a - b = " << a.Minus(b) << std::endl;
+	std::cout << "ab = " << a.Times(b) << std::endl;
+	std::cout << "ba = " << b.Times(a) << std::endl;
+	std::cout << "a.b = " << a.GetDotProduct(b) << std::endl;
+	std::cout << "a* = " << a.GetConjugate() << std::endl;
+	std::cout << "a^-1 = " << a.GetInverse() << std::endl;
+	std::cout << "ta = " << a.Transform(b) << std::endl;
+	std::cout << "|a| = " << a.GetMagnitude() << std::endl;
+	std::cout << "a * scalar = " << a.Times(scalar) << std::endl;
+	std::cout << "a / scalar = " << a.Divide(scalar) << std::endl;
 
-	// Plussing and minusing
-	std::cout << quaternion1 << " + " << quaternion2 << " = " << quaternion1.Plus(quaternion2) << std::endl;
-	std::cout << quaternion1 << " - " << quaternion2 << " = " << quaternion1.Minus(quaternion2) << std::endl;
-
-	// Timesing and dividing
-	std::cout << quaternion1 << " * " << quaternion2 << " = " << quaternion1.Times(quaternion2) << std::endl;
-	std::cout << quaternion1 << " * " << scalar << " = " << quaternion1.Times(scalar) << std::endl;
-	std::cout << quaternion1 << " / " << scalar << " = " << quaternion1.Divide(scalar) << std::endl;
-
-	// Other stuff idk
-	std::cout << "Dot product of " << quaternion1 << " and " << quaternion2 << " = " << quaternion1.GetDotProduct(quaternion2) << std::endl;
-	std::cout << "Magnitude of " << quaternion1 << " = " << quaternion1.GetMagnitude() << std::endl;
-	
-	// Other other stuff
-	std::cout << "Conjugate of " << quaternion1 << " = " << quaternion1.GetConjugate() << std::endl;
-	std::cout << quaternion1 << " transformed around " << quaternion2 << " = " << quaternion1.Transform(quaternion2) << std::endl;
-	std::cout << "Inverse of " << quaternion1 << " = " << quaternion1.GetInverse() << std::endl;
-
-	
 	return 0;
 }

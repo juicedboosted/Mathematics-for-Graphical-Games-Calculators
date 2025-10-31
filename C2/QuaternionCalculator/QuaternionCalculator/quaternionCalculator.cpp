@@ -1,5 +1,6 @@
 #include "quaternionCalculator.h"
 
+#include <sstream>
 #include <iostream>
 #include <cmath>
 
@@ -52,6 +53,17 @@ Quaternion Quaternion::ParseFromString(std::string stringifiedQuaternion)
 	return newQuaternion;
 }
 
+std::string Quaternion::AsString(const Quaternion &quaternion)
+{
+	std::stringstream stream;
+	stream << quaternion.W
+		<< (quaternion.X >= 0 ? "+" : "") << quaternion.X << "i"
+		<< (quaternion.Y >= 0 ? "+" : "") << quaternion.Y << "j"
+		<< (quaternion.Z >= 0 ? "+" : "") << quaternion.Z << "k";
+		
+	return stream.str();
+}
+
 Quaternion Quaternion::Plus(Quaternion &other)
 {
 	return Quaternion
@@ -74,7 +86,7 @@ Quaternion Quaternion::Minus(Quaternion &other)
 	);
 }
 
-Quaternion Quaternion::Times(Quaternion &other)
+Quaternion Quaternion::Times(const Quaternion& other)
 {
 	// TODO: Maybe don't hardcode somehow
 	return Quaternion
@@ -172,4 +184,10 @@ bool Quaternion::RemoveIfEndsWith(std::string& string, std::string ending)
 	// If it ends with the thing then remove it
 	if (endsWith) string.pop_back();
 	return endsWith;
+}
+
+std::ostream &operator<<(std::ostream &stream, const Quaternion &quaternion)
+{
+	stream << Quaternion::AsString(quaternion);
+	return stream;
 }
